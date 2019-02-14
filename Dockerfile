@@ -1,4 +1,4 @@
-FROM centos:latest
+FROM buildpack-deps:stretch-curl
 
 LABEL maintainer="章维 <zhw.js@icloud.com>"
 
