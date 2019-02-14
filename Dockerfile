@@ -21,7 +21,8 @@ RUN curl -s -L --header "Cookie: oraclelicense=accept-securebackup-cookie;" --ur
 && echo "PATH=\$PATH:\$JAVA_HOME/bin:\$JAVA_HOME/jre/bin" >> /etc/profile \
 && echo "export PATH JAVA_HOME CLASSPATH" >> /etc/profile
 
-# tomcat
+
+# 安装 tomcat
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
 RUN mkdir -p "$CATALINA_HOME"
@@ -141,7 +142,7 @@ RUN set -eux; \
 		libapr1-dev \
 		libssl-dev \
 		make \
-		"openjdk-${JAVA_VERSION%%[.~bu-]*}-jdk=$JAVA_DEBIAN_VERSION" \
+		# "openjdk-${JAVA_VERSION%%[.~bu-]*}-jdk=$JAVA_DEBIAN_VERSION" \
 	; \
 	( \
 		export CATALINA_HOME="$PWD"; \
