@@ -1,6 +1,17 @@
-FROM davidcaste/alpine-java-unlimited-jce:jdk8
+#FROM davidcaste/alpine-java-unlimited-jce:jdk8
 
-LABEL maintainer="Edward <zhw.js@icloud.com>"
+FROM anapsix/alpine-java:latest
+
+LABEL key="章维 <zhw.js@icloud.com>" 
+
+# do all in one step
+RUN apk upgrade --update && \
+    apk add --update curl unzip && \
+    curl -jksSLH "Cookie: oraclelicense=accept-securebackup-cookie" -o /tmp/unlimited_jce_policy.zip "http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip" && \
+    unzip -jo -d ${JAVA_HOME}/jre/lib/security /tmp/unlimited_jce_policy.zip && \
+    apk del curl unzip && \
+    apk add xmlstarlet && \
+    rm -rf /tmp/* /var/cache/apk/*
 
 ENV TOMCAT_MAJOR=8 \
     TOMCAT_VERSION=8.5.3 \
