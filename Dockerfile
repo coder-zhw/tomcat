@@ -18,10 +18,10 @@ RUN apk upgrade --update && \
     apk del curl && \
     rm -rf /tmp/* /var/cache/apk/*
 
-COPY logging.properties ${TOMCAT_HOME}/conf/logging.properties
-COPY server.xml ${TOMCAT_HOME}/conf/server.xml
+# COPY logging.properties ${TOMCAT_HOME}/conf/logging.properties
+# COPY server.xml ${TOMCAT_HOME}/conf/server.xml
 WORKDIR $CATALINA_HOME
-VOLUME ["/logs"]
+# VOLUME ["/logs"]
 
 EXPOSE 8080
 # CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]
