@@ -1,6 +1,6 @@
 FROM davidcaste/alpine-java-unlimited-jce:jdk8
 
-MAINTAINER David Castellanos <davidcaste@gmail.com>
+LABEL maintainer="Edward <zhw.js@icloud.com>"
 
 ENV TOMCAT_MAJOR=8 \
     TOMCAT_VERSION=8.5.3 \
@@ -18,10 +18,13 @@ RUN apk upgrade --update && \
     apk del curl && \
     rm -rf /tmp/* /var/cache/apk/*
 
-COPY logging.properties ${TOMCAT_HOME}/conf/logging.properties
-COPY server.xml ${TOMCAT_HOME}/conf/server.xml
+COPY catalina.properties ${TOMCAT_HOME}/conf/catalina.properties
+# COPY server.xml ${TOMCAT_HOME}/conf/server.xml
 WORKDIR $CATALINA_HOME
-VOLUME ["/logs"]
+# VOLUME ["/logs"]
+RUN set -x \
+    && echo "JAVA_OPTS='-Xms1024m -Xmx2048m'" > bin/setenv.sh
 
 EXPOSE 8080
+
 CMD ["/usr/local/tomcat/bin/catalina.sh", "run"]

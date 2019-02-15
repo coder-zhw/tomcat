@@ -1,0 +1,9 @@
+version: '2'
+services:
+  hmap-tomcat:
+        image: ccr.ccs.tencentyun.com/hmap/tomcat:latest
+        restart: always
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./webapps:/usr/local/tomcat/webapps
